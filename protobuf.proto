@@ -1,0 +1,26 @@
+syntax = "proto3";
+option go_package = "./;nats_transport";
+option csharp_namespace = "NatsTransport.Messages";
+
+
+message Values {
+  repeated string arr = 1;
+}
+
+message Request {
+  string Proto = 1;
+  string Scheme = 2;
+  string Host = 3;
+  string URL = 4;
+  string Method = 5;
+  string RemoteAddr = 6;
+  bytes Body = 7;
+  map<string, Values> Header = 8;
+}
+
+message Response {
+  int32 StatusCode = 1;
+  map<string, Values> Header = 2;
+  bytes Body = 3;
+  string Error = 4;
+}

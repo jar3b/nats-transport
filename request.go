@@ -12,6 +12,7 @@ func (r *Request) FromHTTP(req *http.Request) error {
 		return errors.New("nats_transport: request cannot be nil")
 	}
 
+	defer req.Body.Close()
 	buf, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		return fmt.Errorf("nats_transport: cannot read request body")

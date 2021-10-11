@@ -46,7 +46,7 @@ func (nt NatsTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	// Serialize the request.
 	requestBytes, err := proto.Marshal(request)
 	if err != nil {
-		return nil, fmt.Errorf("nats_transport: cannot serialize request")
+		return nil, fmt.Errorf("nats_transport: cannot serialize request: %v", err)
 	}
 
 	// get the outgoing NATS subject
@@ -65,7 +65,7 @@ func (nt NatsTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 		nt.Timeout,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("nats_transport: cannot send NATS request")
+		return nil, fmt.Errorf("nats_transport: cannot send NATS request: %v", err)
 	}
 
 	// Get Response object from NATS message
